@@ -1,0 +1,33 @@
+Input file sample.txt
+[acadgild@localhost ~]$ cat /home/acadgild/leena/ass/ass-72/sample.txt
+Swami Vivekananda was born on 12 January 1863 in Calcutta.
+Narendranath Datta was his original name
+ His father,  Vishwanath Datta, was an attorney at the Calcutta High Court.
+ Durgacharan Datta, Narendra's grandfather, was a Sanskrit and Persian scholar who left his family and became a monk at age twenty-five. Narendra's mother, Bhuvaneswari Devi, was a devout housewife.
+The progressive, rational attitude of Narendra's father and the religious temperament of his mother helped shape his thinking and personality.
+Narendra was interested in spirituality from a young age, and used to play at meditating before the images of deities such as Shiva, Rama and Sita. He was fascinated by wandering ascetics and monks.Narendra was naughty and restless as a child, and his parents often had difficulty controlling him. His mother said, "I prayed to Shiva for a son and he has sent me one of his demons
+
+
+readlines = LOAD '/home/acadgild/leena/ass/ass-72/sample.txt' AS (line:chararray);
+eachword = FOREACH readlines GENERATE FLATTEN(TOKENIZE(line)) as word;
+wordgrp = GROUP eachword BY word;
+countword = FOREACH wordgrp GENERATE group, COUNT(eachword) AS cwords;
+result = ORDER countword BY cwords DESC;
+
+Output
+(and,10)
+(was,8)
+(a,6)
+(his,6)
+(of,4)
+(at,3)
+(the,3)
+(mother,3)
+(Datta,3)
+(Narendra's,3)
+(Shiva,2)
+(age,2)
+(His,2)
+(in,2)
+(to,2)
+(father,2)
